@@ -1,32 +1,45 @@
 const form = document.querySelector('.form');
-const input = form.querySelector('.form__input');
-const button = form.querySelector('.form__button-user');
+const input = form.querySelector('#form__input-name');
+const inputError = form.querySelector(`.${input.id}-error`)
+const button = form.querySelector('.form__submit-user');
 
 
-
-/* const showInputError = () => {
+function showInputError(input, inputError){
   input.classList.add('form__input-type-error')
+    inputError.classList.add('form__input-error')
+    console.log(input.validationMessage)
+    inputError.textContent = input.validationMessage;
 }
-const hideInputError = () => {
+function hideInputError (input){
   input.classList.remove('form__input-type-error')
-} */
+  inputError.classList.remove('form__input-error');
+  inputError.textContent = "";
 
-form.addEventListener('submit', evt => {
-  evt.preventDefault();
-  setSubmitButtonState(false);
-})
-
-function setSubmitButtonState (isFromValid){
-  if(isFromValid){
-    button.removeAttribute('disabled');
-    button.classList.remove('form__button-disabled');
-  } else {
-    button.setAttribute('disabled', true);
-    button.classList.add('form__button-disabled');
+}
+function isValid(){
+  if(!input.validity.valid){
+    showInputError(input, inputError)
+    setSubmitButtonState(false)
+  }else{
+    hideInputError (input)
+    setSubmitButtonState(true)
   }
 }
 
-form.addEventListener('input', evt => {
-  const isValid = input.value.length > 2 && input.value.length < 40;
-  setSubmitButtonState(isValid)
+function setSubmitButtonState(isFormValid){
+  if(isFormValid){
+    button.removeAttribute('disabled');
+    button.classList.remove('form__button-disabled')
+  }else{
+    button.setAttribute('disabled', true);
+    button.classList.add('form__button-disabled')
+  }
+}
+form.addEventListener('submit', evt =>{
+  evt.preventDefault();
+  form.reset();
+  setSubmitButtonState(false);
 })
+
+input.addEventListener('input', isValid )
+

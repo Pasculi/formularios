@@ -5,6 +5,7 @@
 }
 body{
   background: #645f48;
+  font-family:"Arial", sans-serif;
 }
 .container-form{
   position:relative;
@@ -18,7 +19,7 @@ body{
   border: none;
 }
 .container-form__title{
-  font-family:"Arial", sans-serif;
+
   position:absolute;
   top:5px;
 }
@@ -46,9 +47,9 @@ body{
 }
 .form__input-error{
   color:red;
-  font-size: 11.5px;
+  font-size: 10px;
   margin-bottom: 4px;
-  transition: all .3s;
+
 }
 .form__submit{
   width: 100px;
